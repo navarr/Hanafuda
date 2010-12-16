@@ -38,9 +38,9 @@
 					foreach($this->STANDARD_DECK as $v)
 						$this->deck[] = $v;
 
-					$this->__shuffle();
+					$this->_shuffle();
 
-					if($this->__deck_sort_by_earliest_month($this->get_top_card(true),$this->get_top_card(true)))
+					if($this->_deck_sort_by_earliest_month($this->get_top_card(true),$this->get_top_card(true)))
 						$this->dealer = $this->turn = 1;
 					else
 						$this->dealer = $this->turn = 2;
@@ -51,9 +51,9 @@
 					foreach($this->STANDARD_DECK as $v)
 						$this->deck[] = $v;
 
-					$this->__shuffle();
+					$this->_shuffle();
 
-					$this->__first_deal();
+					$this->_first_deal();
 			}
 		}
 
@@ -110,7 +110,7 @@
 			return $name;
 		}
 
-		private function __first_deal()
+		private function _first_deal()
 		{
 			for($a = 0;$a < 2;$a++)
 			{
@@ -121,9 +121,9 @@
 				for($i = 0;$i < 4;$i++)
 					$this->zones[3][] = $this->get_top_card(true);
 			}
-			usort($this->zones[0],array($this,"__deck_sort_by_earliest_month"));
-			usort($this->zones[2],array($this,"__deck_sort_by_earliest_month"));
-			usort($this->zones[3],array($this,"__deck_sort_by_earliest_month"));			
+			usort($this->zones[0],array($this,"_deck_sort_by_earliest_month"));
+			usort($this->zones[2],array($this,"_deck_sort_by_earliest_month"));
+			usort($this->zones[3],array($this,"_deck_sort_by_earliest_month"));			
 		}
 
 		public function get_top_card($delete = false)
@@ -134,7 +134,7 @@
 			return $card;
 		}
 
-		private function __increment_month()
+		private function _increment_month()
 		{
 			$this->month++;
 			if($this->month > 12)
@@ -145,7 +145,7 @@
 			Shuffle Function.
 			Shuffles all cards left in the current deck.
 		*/
-		private function __shuffle()
+		private function _shuffle()
 		{
 			$cards = array();
 			foreach($this->deck as $v)
@@ -158,7 +158,7 @@
 				$i = rand(0,count($cards)-1);
 				$this->deck[] = $cards[$i];
 				unset($cards[$i]);
-				usort($cards,array($this,"__deck_sort_by_id"));
+				usort($cards,array($this,"_deck_sort_by_id"));
 			}
 		}
 
@@ -166,7 +166,7 @@
 			Deck Sort (by ID)
 			Called in PHP's usort for sorting a deck.
 		*/
-		private function __deck_sort_by_id($a,$b)
+		private function _deck_sort_by_id($a,$b)
 		{
 			if($a[0] > $b[0])
 				return 1;
@@ -180,7 +180,7 @@
 			Deck Sort (by Value)
 			Called in PHP's usort for sorting the prizes.
 		*/
-		private function __deck_sort_by_value($a,$b)
+		private function _deck_sort_by_value($a,$b)
 		{
 			if($a[2] > $b[2] || ($a[2] == $b[2] && $a[1] > $b[1]))
 				return 1;
@@ -190,7 +190,7 @@
 				return -1;
 		}
 
-		private function __deck_sort_by_earliest_month($a,$b)
+		private function _deck_sort_by_earliest_month($a,$b)
 		{
 			if($a[1] < $b[1])
 				return -1;
