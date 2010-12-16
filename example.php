@@ -22,8 +22,8 @@
 					$name = $koikoi->get_card_name($card);
 					echo "<img src=\"{$file}\" title=\"{$name[0]} {$name[1]}\" />";
 					echo " ";
-					if($i % 8 == 0) echo "<br /><br />";
-					elseif($zoneID == 2 && $i % 4 == 0) echo "<br />";
+					if($i == count($zone)) echo "<br /><br />";
+					elseif($zoneID == 2 && $i % round(count($zone)/2) == 0) echo "<br />";
 				}
 			}
 			else
